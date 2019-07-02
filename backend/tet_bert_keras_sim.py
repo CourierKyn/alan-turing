@@ -8,13 +8,13 @@
 def calculate_count():
     """
       统计一下1000条测试数据的平均耗时
-    :return: 
+    :return:
     """
     from backend.extract_keras_bert_feature import KerasBertVector
     import time
 
     bert_vector = KerasBertVector()
-    print("bert start ok!")
+    # print("bert start ok!")
     time_start = time.time()
     for i in range(1000):
         vector = bert_vector.bert_encode(["jy，你知道吗，我一直都很喜欢你呀，在一起在一起在一起，哈哈哈哈"])
@@ -52,7 +52,7 @@ def sim_two_question(ques_1):
         return triangle
 
     bert_vector = KerasBertVector()
-    print("bert start ok!")
+    # print("bert start ok!")
     # while True:
         # print("input ques-1: ")
         # ques_1 = input()
@@ -84,4 +84,5 @@ def sim_two_question(ques_1):
 
 if __name__=="__main__":
     # calculate_count()
-    sim_two_question()
+    ques_1 = ''
+    sim_two_question(ques_1)

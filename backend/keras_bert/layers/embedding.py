@@ -1,7 +1,7 @@
 import keras
 import keras.backend as K
-from keras_pos_embd import PositionEmbedding
-from keras_layer_normalization import LayerNormalization
+from backend.keras_pos_embd import PositionEmbedding
+from backend.keras_layer_normalization import LayerNormalization
 
 
 class TokenEmbedding(keras.layers.Embedding):

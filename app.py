@@ -16,7 +16,7 @@ def hello_world():
     # print(most_sim)
     return json.dumps(
         {
-            'answer': most_sim
+            'answer': most_sim,
         }, ensure_ascii=False
     )
 

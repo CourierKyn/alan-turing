@@ -10,7 +10,7 @@ def calculate_count():
       统计一下1000条测试数据的平均耗时
     :return: 
     """
-    from FeatureProject.bert.extract_keras_bert_feature import KerasBertVector
+    from backend.extract_keras_bert_feature import KerasBertVector
     import time
 
     bert_vector = KerasBertVector()
@@ -29,7 +29,7 @@ def calculate_count():
 
 def sim_two_question():
     """测试一下两个问题的相似句子"""
-    from FeatureProject.bert.extract_keras_bert_feature import KerasBertVector
+    from backend.extract_keras_bert_feature import KerasBertVector
     from sklearn import preprocessing
     from math import pi
     import numpy as np

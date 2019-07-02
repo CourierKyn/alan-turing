@@ -4,9 +4,9 @@
 # @author   :Mo
 # @function :extract feature of bert and keras
 
-from conf.feature_config import gpu_memory_fraction, config_name, ckpt_name, vocab_file, max_seq_len, layer_indexes
-from keras_bert import load_trained_model_from_checkpoint, Tokenizer
-from FeatureProject.bert.layers_keras import NonMaskingLayer
+from backend.feature_config import gpu_memory_fraction, config_name, ckpt_name, vocab_file, max_seq_len, layer_indexes
+from backend.keras_bert import load_trained_model_from_checkpoint, Tokenizer
+from backend.layers_keras import NonMaskingLayer
 import keras.backend.tensorflow_backend as ktf_keras
 import keras.backend as k_keras
 from keras.models import Model

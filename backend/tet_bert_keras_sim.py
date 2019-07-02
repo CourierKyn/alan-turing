@@ -27,7 +27,7 @@ def calculate_count():
     # 0.01629048466682434  linux cpu avg
 
 
-def sim_two_question():
+def sim_two_question(ques_1):
     """测试一下两个问题的相似句子"""
     from backend.extract_keras_bert_feature import KerasBertVector
     from sklearn import preprocessing
@@ -35,6 +35,7 @@ def sim_two_question():
     import numpy as np
     import time
     import math
+    import pandas as pd
 
     def cosine_distance(v1, v2): # 余弦距离
         if v1 and v2:
@@ -52,14 +53,22 @@ def sim_two_question():
 
     bert_vector = KerasBertVector()
     print("bert start ok!")
-    while True:
-        print("input ques-1: ")
-        ques_1 = input()
-        print("input ques_2: ")
-        ques_2 = input()
-        vector_1 = bert_vector.bert_encode([ques_1])
+    # while True:
+        # print("input ques-1: ")
+        # ques_1 = input()
+        # print("input ques_2: ")
+        # ques_2 = input()
+    vector_1 = bert_vector.bert_encode([ques_1])
+    q_and_a = pd.read_csv('Q_and_A.csv')
+    queses_2 = q_and_a.Q
+    answers = q_and_a.A.tolist()
+    comp = []
+    for ques_2 in queses_2:
         vector_2 = bert_vector.bert_encode([ques_2])
         sim = cosine_distance(vector_1[0], vector_2[0])
+        comp.append(sim)
+    comp = np.array(comp)
+    most_sim = answers[np.argmax(comp)]
         # sim_list = [sim, 0, 0.2, 0.4, 0.6, 0.8, 1.0]
         # sim = preprocessing.scale(sim_list)[0]
         # sim = preprocessing.MinMaxScaler(feature_range=(0, 1)).fit_transform(sim_list)[0]
@@ -69,7 +78,8 @@ def sim_two_question():
         # sim = scale_triangle(sim)
         # print(sim_1)
         # print(sim_2)
-        print(sim)
+        # print(most_sim)
+    return most_sim
 
 
 if __name__=="__main__":

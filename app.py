@@ -24,7 +24,13 @@ def hello_world():
         sim = cosine_distance(vector_1[0], vector_2)
         comp.append(sim)
     comp = np.array(comp)
-    most_sim = answers[np.argmax(comp)]
+    argmax_comp = np.argmax(comp)
+    print('相似度：')
+    print(comp[argmax_comp])
+    if comp.max() < 0.85:
+        most_sim = '相关功能正在更新'
+    else:
+        most_sim = answers[argmax_comp]
     return_value = json.dumps(
         {
             'answer': most_sim,

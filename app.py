@@ -4,9 +4,11 @@ import pandas as pd
 import json
 from backend.extract_keras_bert_feature import KerasBertVector
 import numpy as np
+from flask_cors import *
 
 app = Flask(__name__)
 
+CORS(app, resources=r'/*')
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
     ques_1 = request.get_json(force=True)['query']
@@ -38,6 +40,7 @@ def hello_world():
     )
     # print(most_sim)
     # return Response(response=return_value, status=200, mimetype='text/html')
+    # return_value.headers['Access-Control-Allow-Origin'] = '*'
     return return_value
 
 if __name__ == '__main__':

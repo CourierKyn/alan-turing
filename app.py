@@ -12,6 +12,10 @@ CORS(app, resources=r'/*')
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
     ques_1 = request.get_json(force=True)['query']
+    for stop in stop_words:
+        if stop in ques_1:
+            ques_1 = ques_1.replace(stop, '')
+    print(ques_1)
     def cosine_distance(v1, v2): # 余弦距离
         if v1 and v2:
             return np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
@@ -21,6 +25,7 @@ def hello_world():
     # q_and_a = pd.read_csv('Q_and_A.csv')
     # queses_2 = q_and_a.Q
     answers = q_and_a.A.tolist()
+    questions = q_and_a.Q.tolist()
     comp = []
     for vector_2 in queses_2_vec:
         sim = cosine_distance(vector_1[0], vector_2)
@@ -29,7 +34,8 @@ def hello_world():
     argmax_comp = np.argmax(comp)
     print('相似度：')
     print(comp[argmax_comp])
-    if comp.max() < 0.85:
+    print(questions[argmax_comp])
+    if comp.max() < 0.50:
         most_sim = '相关功能正在更新'
     else:
         most_sim = answers[argmax_comp]
@@ -52,6 +58,7 @@ if __name__ == '__main__':
     for ques_2 in queses_2:
         vector_2 = bert_vector.bert_encode([ques_2])
         queses_2_vec.append(vector_2[0])
+    stop_words = ['怎么','如何','吗','呢','怎么样','什么','是','我要','去','能否','是否','']
     app.run()
     # print('请输入问题：')
     # hello_world()
